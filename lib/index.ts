@@ -1,8 +1,10 @@
-export interface pipe<I, O> {
-  (I): O
-}
+// export interface pip<I, O> {
+//   (I): O
+// }
+export type pipe<I, O> = (_in: I) => O
 export abstract class Pipe<I, O> {
   private pipe: Pipe<O, any>
+  //T is the next pipe's out put type
   to<T>(p: pipe<O, T> | Pipe<O, T>): Pipe<O, T> {
     if (p instanceof Pipe) {
       this.pipe = p
