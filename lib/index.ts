@@ -36,17 +36,6 @@ export class PipeWrapper<I, O> extends Pipe<I, O> {
     return this.fn(data)
   }
 }
-export class IdPipe<T> extends Pipe<T, T>{
-  fn: (_: T) => any
-  constructor(fn: (_: T) => any) {
-    super()
-    this.fn = fn
-  }
-  onData(data: T) {
-    this.fn(data)
-    return data
-  }
-}
 export abstract class Source<O> extends Pipe<any, O> {
   onData(data: any): O {
     return null
@@ -71,7 +60,10 @@ export const factory = {
   wrapper<I, O>(fn: pipe<I, O>) {
     return new PipeWrapper(fn)
   },
-  id<T>(fn: (_: T) => any) {
-    return new IdPipe(fn)
+  id<T>(fn: (_: T) => any): (_: T) => T {
+    return value => {
+      fn(value)
+      return value
+    }
   }
 }

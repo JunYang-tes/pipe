@@ -1,6 +1,4 @@
-export interface pipe<I, O> {
-    (I: any): O;
-}
+export declare type pipe<I, O> = (_in: I) => O;
 export declare abstract class Pipe<I, O> {
     private pipe;
     to<T>(p: pipe<O, T> | Pipe<O, T>): Pipe<O, T>;
@@ -13,11 +11,6 @@ export declare class PipeWrapper<I, O> extends Pipe<I, O> {
     constructor(fn: pipe<I, O>);
     onData(data: I): O;
 }
-export declare class IdPipe<T> extends Pipe<T, T> {
-    fn: (_: T) => any;
-    constructor(fn: (_: T) => any);
-    onData(data: T): T;
-}
 export declare abstract class Source<O> extends Pipe<any, O> {
     onData(data: any): O;
 }
@@ -29,5 +22,5 @@ export declare class IterableSource<O> extends Source<O> {
 export declare const factory: {
     it<O>(it: Iterable<O>): IterableSource<O>;
     wrapper<I, O>(fn: pipe<I, O>): PipeWrapper<I, O>;
-    id<T>(fn: (_: T) => any): IdPipe<T>;
+    id<T>(fn: (_: T) => any): (_: T) => T;
 };
