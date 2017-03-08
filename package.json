@@ -1,0 +1,11 @@
+{
+  "name": "pipe",
+  "version": "1.0.0",
+  "description": "An object pipe",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Qianba <ouyangqianba@gmail.com>",
+  "license": "MIT"
+}
