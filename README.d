@@ -1,5 +1,4 @@
-# Object pipe
-
+# Object pipe  
 ```typescript
 import * as Pipe from "pipe"
 let nums = new Pipe.IterableSource([1, 2, 3, 4, 5, 6, 7])
