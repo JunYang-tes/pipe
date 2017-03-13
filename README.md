@@ -37,3 +37,27 @@ let p = nums
   }))  // a Pipe<Object,Object> which object looks like { str:string }
 nums.start()
 ```
+
+# []T => T via pip
+```typescript
+import * as Pipe from "../lib"
+const { id, it, flatify } = Pipe.factory
+let nums = it([1, 2, 3])
+let p = nums
+  // d=> [d,d+1, d+2] is a pipe which returns a array of number
+  // flatify<number>(d=>[d,d+1,d+2]) returns a new pipe which yields number
+  .to(flatify<number>(d => [d, d + 1, d + 2]))
+  .to(d => { // d is a number
+    console.log(d)
+    return d;
+  })
+
+nums.start()
+console.log("=======================")
+nums = it([1, 2, 3])
+
+nums.to(d => [d, d, d, d]) //number=> []number
+  .to(new Pipe.Flat()) // []number => number
+  .to(console.log) number => void
+nums.start()
+```
